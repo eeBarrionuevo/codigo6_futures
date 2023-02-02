@@ -11,15 +11,27 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    getFullName().then((value) {
-      name = value;
-      setState(() {});
-    });
+    // getFullName().then((value) {
+    //   name = value;
+    //   setState(() {});
+    // });
+    // getData();
+  }
+
+  getData() async {
+    name = await getFullName();
+    setState(() {});
   }
 
   Future<String> getFullName() async {
     return Future.delayed(Duration(seconds: 3), () {
       return "Juan Carlos Montes";
+    });
+  }
+
+  Future<List> getProducts() async {
+    return Future.delayed(Duration(seconds: 5), () {
+      return ["Camisa", "Zapatos", "Corbata", "Traje"];
     });
   }
 
@@ -32,8 +44,22 @@ class _HomePageState extends State<HomePage> {
 
     return Scaffold(
       body: Center(
-        child: Text(
-          name,
+        child: FutureBuilder(
+          future: getProducts(),
+          builder: (BuildContext context, AsyncSnapshot snap) {
+            print(snap);
+            if (snap.hasData) {
+              List products = snap.data;
+              return ListView.builder(
+                // shrinkWrap: true,
+                itemCount: products.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return Text(products[index]);
+                },
+              );
+            }
+            return CircularProgressIndicator();
+          },
         ),
       ),
     );
