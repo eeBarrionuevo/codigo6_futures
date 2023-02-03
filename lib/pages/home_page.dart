@@ -41,8 +41,20 @@ class _HomePageState extends State<HomePage> {
     //   print("Estoy dentro del future");
     //   name = value;
     // });
-
     return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          "La tiendita de Ramón",
+        ),
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: Icon(
+              Icons.person,
+            ),
+          ),
+        ],
+      ),
       body: Center(
         child: FutureBuilder(
           future: getProducts(),

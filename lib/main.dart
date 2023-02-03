@@ -1,4 +1,4 @@
-import 'package:codigo6_futures/home_page.dart';
+import 'package:codigo6_futures/pages/home_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
